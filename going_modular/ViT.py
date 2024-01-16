@@ -41,7 +41,7 @@ class input_embedding_layer(torch.nn.Module):
     def forward(self,x):
         image_resolution = x.shape[-1]
         batch_size = x.shape[0]
-        assert image_resolution % self.patch_size==0, f"Input image size must be divisble by patch size, image size: {image_resolution}, patch size: {patch_size}"
+        assert image_resolution % self.patch_size==0, f"Input image size must be divisble by patch size, image size: {image_resolution}, patch size: {self.patch_size}"
         fwd= self.input_layer_stack(x)
         change_dim= fwd.permute(0,2,1)
         class_token = self.class_token.expand(batch_size, -1, -1)
