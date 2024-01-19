@@ -7,7 +7,7 @@ device = "mps" if torch.backends.mps.is_available() else "cpu"
 ### Lets create a input embedding layer class by subclassing torch.nn
 
 class input_embedding_layer(torch.nn.Module):
-    
+    # Image patches embedding layer subclassing nn.Module
     def __init__(self,input_shape,
                  output_shape,patch_size,
                  number_of_patches,
