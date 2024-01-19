@@ -119,7 +119,7 @@ class TransformerEncoderBlock(torch.nn.Module):
 ### Creating the entire ViT architecture
 
 class ViT(torch.nn.Module):
-
+    # Main ViT architecture, integrating the input embedding layer, Transformer Encoder Block and the Classifier Head 
     def __init__(self,input_shape,embedding_dimension,
                  patch_size,number_of_patches,num_heads,
                  attention_dropout,embedding_dropout,mlp_size,
