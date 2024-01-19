@@ -54,7 +54,7 @@ class input_embedding_layer(torch.nn.Module):
 
 # Lets create the Multi Head Attention Block 
 class MultiHeadAttentionBlock(torch.nn.Module):
-
+    # Multii Head attention layer with multiple layer with Q,K,V values
     def __init__(self,embedding_dim:int,num_heads:int,attention_dropout:int):
         super().__init__()
 
