@@ -1,7 +1,8 @@
 
 #### Let's use argparse to allow us to specify the hyper-parameters on the command line 
 
-import os
+import sys
+sys.path.append("/Users/vishal./ViT-replication-using-PyTorch/src")
 import argparse
 
 import torch
@@ -101,16 +102,15 @@ set_seeds()
 
 
 pretrained_vit.heads= torch.nn.Linear(in_features=embedding_dimension,out_features=len(class_names),device=device)
-# Instantiate the model
-model= model.ViT(input_shape=3,hidden_units=HIDDEN_UNITS,output_shape=len(class_names)).to(device)
+
 # Setup Loss and Optimizer 
 
 loss= nn.CrossEntropyLoss()
-optimizer_fn= torch.optim.Adam(model.parameters(),lr=LEARNING_RATE,weight_decay=0.03)
+optimizer_fn= torch.optim.Adam(pretrained_vit.parameters(),lr=LEARNING_RATE,weight_decay=0.03)
 
 # Setup the data engine to train and inference 
 
-engine.train(model=model,
+engine.train(model=pretrained_vit,
              train_dataloader=train_data,
              test_dataloader=test_data,
              optimizer=optimizer_fn,
@@ -120,4 +120,4 @@ engine.train(model=model,
 
 # Let's save the model
 
-utils.save_model(model,target_dir="models",model_name="trained_ViT.pth")
+utils.save_model(pretrained_vit,target_dir="models",model_name="trained_ViT.pth")
