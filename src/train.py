@@ -1,8 +1,4 @@
 
-#### Let's use argparse to allow us to specify the hyper-parameters on the command line 
-
-import sys
-sys.path.append("/Users/vishal./ViT-replication-using-PyTorch/src")
 import argparse
 
 import torch
@@ -11,7 +7,7 @@ from torchvision import transforms
 from torch import nn
 
 import data_setup, engine,model,utils
-from src.helper_functions import set_seeds,set_device
+from src.helper_functions import set_device, set_seeds
 
 # Create a parser 
 parser = argparse.ArgumentParser(description="Get some hyperparameters")
@@ -39,12 +35,12 @@ parser.add_argument("--learning_rate",
                     help="learning to use during training")
 # Get an arg for training dir
 parser.add_argument("--train_dir",
-                    default="data/pizza_steak_sushi/train",
+                    default="data/pizza_steak_sushi/train/",
                     type=str,
                     help="specify the training directory")
 # Get an arg for testing dir
 parser.add_argument("--test_dir",
-                    default="data/pizza_steak_sushi/test",
+                    default="data/pizza_steak_sushi/test/",
                     type=str,
                     help="Specify the training directory")
 #Device
@@ -53,11 +49,9 @@ parser.add_argument("--device",
                     type=str,
                     help="Speicfy the device")
 
-
-# get our arguments for test directory
 args= parser.parse_args()
 
-# Setup hyper-parameters
+
 NUM_EPOCHS=args.num_epochs
 BATCH_SIZE= args.batch_size
 HIDDEN_UNITS= args.hidden_units
@@ -89,11 +83,10 @@ train_data,test_data,class_names= data_setup.create_dataloaders(train_dir=train_
                                                                 transform=data_transform,batch_size=32)
 
 
-pretrained_vit_weights = torchvision.models.ViT_B_16_Weights.DEFAULT # DEFAULT will give us the best weights
+pretrained_vit_weights = torchvision.models.ViT_B_16_Weights.DEFAULT 
 
-pretrained_vit= torchvision.models.vit_b_16(weights=pretrained_vit_weights).to(device) # call the model from torchvision and update its weights with the DEFAULT ViT weights we got from PyTorch
+pretrained_vit= torchvision.models.vit_b_16(weights=pretrained_vit_weights).to(device) 
 
-# lets freeze base layers, because the all the layers already have the trained weights. We will modify the MLP head block and set the output features to the number of classess we have
 
 for params in pretrained_vit.parameters():
     params.requires_grad=False
@@ -118,6 +111,5 @@ engine.train(model=pretrained_vit,
              epochs=NUM_EPOCHS,
              device=device)
 
-# Let's save the model
 
 utils.save_model(pretrained_vit,target_dir="models",model_name="trained_ViT.pth")

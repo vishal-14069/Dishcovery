@@ -29,7 +29,6 @@ def train_step(model: torch.nn.Module,
     A tuple of training loss and training accuracy metrics.
     In the form (train_loss, train_accuracy). For example:
     
-    (0.1112, 0.8743)
   """
   # Put model in train mode
   model.train()
@@ -149,11 +148,6 @@ def train(model: torch.nn.Module,
                   train_acc: [...],
                   test_loss: [...],
                   test_acc: [...]} 
-    For example if training for epochs=2: 
-                 {train_loss: [2.0616, 1.0537],
-                  train_acc: [0.3945, 0.3945],
-                  test_loss: [1.2641, 1.5706],
-                  test_acc: [0.3400, 0.2973]} 
   """
   # Create empty results dictionary
   results = {"train_loss": [],
