@@ -7,7 +7,7 @@ device = "mps" if torch.backends.mps.is_available() else "cpu"
 ### Lets create a input embedding layer class by subclassing torch.nn
 
 class input_embedding_layer(torch.nn.Module):
-    
+    # Image patches embedding layer subclassing nn.Module
     def __init__(self,input_shape,
                  output_shape,patch_size,
                  number_of_patches,
@@ -54,7 +54,7 @@ class input_embedding_layer(torch.nn.Module):
 
 # Lets create the Multi Head Attention Block 
 class MultiHeadAttentionBlock(torch.nn.Module):
-
+    # Multii Head attention layer with multiple layer with Q,K,V values
     def __init__(self,embedding_dim:int,num_heads:int,attention_dropout:int):
         super().__init__()
 
@@ -119,7 +119,7 @@ class TransformerEncoderBlock(torch.nn.Module):
 ### Creating the entire ViT architecture
 
 class ViT(torch.nn.Module):
-
+    # Main ViT architecture, integrating the input embedding layer, Transformer Encoder Block and the Classifier Head 
     def __init__(self,input_shape,embedding_dimension,
                  patch_size,number_of_patches,num_heads,
                  attention_dropout,embedding_dropout,mlp_size,

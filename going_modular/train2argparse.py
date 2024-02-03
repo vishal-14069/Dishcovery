@@ -10,7 +10,7 @@ from torchvision import transforms
 from torch import nn
 
 import data_setup, engine,model,utils
-
+# Training funtionality setup using argparse, allowing us to train model right from the CLI
 # Create a parser 
 parser = argparse.ArgumentParser(description="Get some hyperparameters")
 
