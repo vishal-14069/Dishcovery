@@ -1,6 +1,4 @@
 
-"""File containing various utility functions for PyTorch Model Training"""
-
 from pathlib import Path
 import torch
 
@@ -22,8 +20,6 @@ def save_model(model: torch.nn.Module,
   """
   # Create target directory
   target_dir_path = Path(target_dir)
-  target_dir_path.mkdir(parents=True,
-                        exist_ok=True)
   
   # Create model save path
   assert model_name.endswith(".pth") or model_name.endswith(".pt"), "model_name should end with '.pt' or '.pth'"

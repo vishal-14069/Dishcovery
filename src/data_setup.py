@@ -49,13 +49,13 @@ def create_dataloaders(
     train_dataloader = DataLoader(
         dataset=train_data,
         batch_size= batch_size,
-        num_workers=num_workers)
+        )
     
     test_dataloader= DataLoader(
         dataset=test_data,
         batch_size= batch_size,
         shuffle=False,
-        num_workers=num_workers)
+        )
     
     class_names= train_data.classes
 
