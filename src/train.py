@@ -23,11 +23,6 @@ parser.add_argument("--batch_size",
                     default=32,
                     type=int,
                     help="number of samples per batch")
-# Get an arg for hidden_units
-parser.add_argument("--hidden_units",
-                    default=10,
-                    type=int,
-                    help="Number of Hidden Units")
 # Get an arg for learning rate
 parser.add_argument("--learning_rate",
                     default=0.001,
@@ -58,7 +53,7 @@ HIDDEN_UNITS= args.hidden_units
 LEARNING_RATE= args.learning_rate
 DEVICE= args.device
 
-print(f"The Model will train for {NUM_EPOCHS} epochs with a batch size {BATCH_SIZE} using {HIDDEN_UNITS} layers with a learning rate of {LEARNING_RATE}")
+print(f"The Model will train for {NUM_EPOCHS} epochs with a batch size {BATCH_SIZE} with a learning rate of {LEARNING_RATE}")
 
 
 # Setup Directories for Train and Test
@@ -80,7 +75,7 @@ data_transform= transforms.Compose([
 embedding_dimension= 768 # vit-b embedding dimension
 # Create the dataloaders
 train_data,test_data,class_names= data_setup.create_dataloaders(train_dir=train_dir,test_dir=test_dir,
-                                                                transform=data_transform,batch_size=32)
+                                                                transform=data_transform,batch_size=BATCH_SIZE)
 
 
 pretrained_vit_weights = torchvision.models.ViT_B_16_Weights.DEFAULT 
