@@ -14,9 +14,9 @@ def save_model(model: torch.nn.Module,
       either ".pth" or ".pt" as the file extension.
   
   Example usage:
-    save_model(model=model_0,
-               target_dir="models",
-               model_name="05_going_modular_tingvgg_model.pth")
+    save_model(model=model,
+               target_dir="src",
+               model_name="trained_ViT_model.pth")
   """
   # Create target directory
   target_dir_path = Path(target_dir)
@@ -29,3 +29,4 @@ def save_model(model: torch.nn.Module,
   print(f"[INFO] Saving model to: {model_save_path}")
   torch.save(obj=model.state_dict(),
              f=model_save_path)
+  

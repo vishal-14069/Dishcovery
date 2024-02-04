@@ -37,7 +37,8 @@ weights= f"{sys.path[0]}/trained_ViT.pth"
 device = set_device(DEVICE)
 set_seeds()
 
-class_names= ['Pizza', 'Steak', 'Sushi']
+images_dir= "/Users/vishal./data/food_classification_dataset"
+class_names= torchvision.datasets.ImageFolder(images_dir).classes
 
 model= torchvision.models.vit_b_16().to(device)
 

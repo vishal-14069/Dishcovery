@@ -5,19 +5,20 @@ for image classification data
 """
 
 import os
-
+from typing import Optional
+import torch
 from torchvision import datasets,transforms
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader,random_split
 from pathlib import Path
 
 NUM_WORKERS= os.cpu_count()
 
 
 def create_dataloaders(
-    train_dir:str,
-    test_dir:str,
+    images_dir:str,
     transform:transforms.Compose,
     batch_size:int,
+    test_split_ratio:float,
     num_workers: int=NUM_WORKERS):
 
     """
@@ -38,25 +39,34 @@ def create_dataloaders(
         Where class_names is a list of the target classes.
     """
 
-    train_data = datasets.ImageFolder(
-        root= train_dir,
-        transform= transform)
-    
-    test_data=datasets.ImageFolder(
-        root=test_dir,
-        transform=transform)
+    main_image_folder = datasets.ImageFolder(root=images_dir,
+                                             transform=transform
+                                            )
 
+    num_train_images= int((1-test_split_ratio)*len(main_image_folder))
+    num_test_images= int(test_split_ratio*len(main_image_folder))
+
+    check= (num_test_images+num_train_images) - len(main_image_folder)
+    
+    if check>=0 or check<0:
+        num_test_images=num_test_images+abs(check)
+        
+    train_data, test_data = random_split(main_image_folder, 
+                                        (num_train_images,num_test_images)
+                                        )
+    
     train_dataloader = DataLoader(
         dataset=train_data,
         batch_size= batch_size,
+        shuffle=True
         )
     
     test_dataloader= DataLoader(
         dataset=test_data,
         batch_size= batch_size,
-        shuffle=False,
+        shuffle=False
         )
     
-    class_names= train_data.classes
+    class_names= main_image_folder.classes
 
     return train_dataloader,test_dataloader,class_names
