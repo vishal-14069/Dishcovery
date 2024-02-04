@@ -31,6 +31,8 @@ Run Inference:
   python predict.py --image_path "pizza.jpg" --device "cpu"
 ```
 
+<img src="./assets/inference_ss.png" width="500px"></img>
+
 To Do:
 
 * Train the model on a larger dataset
