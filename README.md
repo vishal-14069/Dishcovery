@@ -28,7 +28,7 @@ The Food Classification App is powered by a Pretrained <a href="https://openrevi
 Run Inference:
 
 ```sh
-  python predict.py --image_path "pizza.jpg" --device "cpu"
+  python predict.py --image_path "assets/prediction_pizza.jpg" --device "cpu"
 ```
 
 <img src="./assets/inference_ss.png" width="500px"></img>
