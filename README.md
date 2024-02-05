@@ -20,8 +20,8 @@ The Food Classification App is powered by a Pretrained <a href="https://openrevi
   python train.py --num_epochs 10 \
                   --batch_size 32 \
                   --learning_rate 1e-3 \
-                  --train_dir "./ViT-using-PyTorch/data/train" \
-                  --test_dir "./ViT-using-PyTorch/data/test" \
+                  --train_dir "./Dishcovery/data/train" \
+                  --test_dir "./Dishcovery/data/test" \
                   --device "cpu" \
   ```
 
